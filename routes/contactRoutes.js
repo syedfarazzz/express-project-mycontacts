@@ -1,5 +1,6 @@
 const express = require("express");
 const {getContact, getContacts, createContact, updateContact, deleteContact} = require("../controllers/contactController");
+const validateToken = require("../middleware/ValidateTokenHandler");
 const router = express.Router();
 
 // router.get((req, res) => {
@@ -20,6 +21,8 @@ const router = express.Router();
 
 // router.route('/:id').delete(deleteContact);
 //above same routes can be written in simplified form
+
+router.use(validateToken);      //As all of the routes are Private, otherwise we would have to use with specific routes only
 
 router.route('/').get(getContacts).post(createContact);
 
